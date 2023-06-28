@@ -1,6 +1,6 @@
 import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ProductsService } from 'src/modules/products/products.service';
-import { Product } from 'src/modules/products/products.model';
+import { ProductsService } from './products.service';
+import { Product } from './products.model';
 
 const config = {
   defaultPageLimit: 10,
@@ -43,7 +43,6 @@ export class ProductResolver {
     @Args({ name: 'count', type: () => Int }) count: number,
     @Args({ name: 'categories', type: () => [String], nullable: true }) categories?: string[],
   ) {
-    console.log({ categories });
     return this.productsService.createProduct({ name, count, price, description, categories });
   }
 }

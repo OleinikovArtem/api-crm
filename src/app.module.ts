@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ProductsModule } from './modules/products/products.module';
 
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+
 import { PrismaModule } from './database/prisma.module';
+
+import { ProductsModule } from './modules/products/products.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 
 @Module({
   imports: [
@@ -13,6 +16,7 @@ import { PrismaModule } from './database/prisma.module';
     }),
     PrismaModule,
     ProductsModule,
+    CategoriesModule,
   ],
   controllers: [],
   providers: [],
