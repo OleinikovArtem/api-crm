@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductsRepository } from './products.repository';
-import { Product } from '@prisma/client';
+import { Prisma, Product } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
@@ -28,13 +28,35 @@ export class ProductsService {
     });
   }
 
-  async getCount(params?: {}) {
-    return this.repository.getCount(params);
+  async getProductById(id: string) {
+    return this.repository.getProductById(id);
   }
 
-  async getProducts(params: { page: number, limit: number }) {
-    const { page, limit } = params;
+  async getCount({ categories }: { categories?: string[] } = {}) {
+    const where: Prisma.ProductWhereInput = {};
+    if (categories?.length) {
+      where.categories = this.createCategoryListRelationFilter(categories);
+    }
 
-    return this.repository.getProducts({ skip: (page - 1) * limit, take: limit });
+    return this.repository.getCount({ where });
+  }
+
+  async getProducts(params: { page: number, limit: number, categories?: string[] }) {
+    const { page, limit, categories } = params;
+    const where: Prisma.ProductWhereInput = {};
+
+    if (categories?.length) {
+      where.categories = this.createCategoryListRelationFilter(categories);
+    }
+
+    return this.repository.getProducts({
+      skip: (page - 1) * limit,
+      take: limit,
+      where,
+    });
+  }
+
+  private createCategoryListRelationFilter(categories: string[]) {
+    return { some: { OR: categories?.map(category => ({ name: category })) } };
   }
 }
