@@ -4,8 +4,7 @@ import { Product } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
-  constructor(private repository: ProductsRepository) {
-  }
+  constructor(private repository: ProductsRepository) {}
 
   async createProduct(params: {
     name: Product['name'],
@@ -18,8 +17,12 @@ export class ProductsService {
     return this.repository.createProduct({ name, count, description, price });
   }
 
-  async getProducts(params: { page?: number, limit?: number }) {
-    const { page = 1, limit = 10 } = params;
+  async getCount(params?: {}) {
+    return this.repository.getCount(params);
+  }
+
+  async getProducts(params: { page: number, limit: number }) {
+    const { page, limit } = params;
 
     return this.repository.getProducts({ skip: (page - 1) * limit, take: limit });
   }

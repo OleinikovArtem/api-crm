@@ -2,14 +2,27 @@ import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ProductsService } from 'src/modules/products/products.service';
 import { Product } from 'src/modules/products/products.model';
 
+const config = {
+  defaultPageLimit: 10,
+  defaultPage: 1,
+};
+
 @Resolver()
-export class ApiResolver {
+export class ApiProductResolver {
   constructor(private readonly productsService: ProductsService) {
   }
 
-  @Query(() => [Product])
-  async getProducts() {
-    return this.productsService.getProducts({});
+  @Query(() => [Product], { name: 'products' })
+  async getProducts(
+    @Args({ name: 'page', type: () => Int, defaultValue: config.defaultPage }) page: number,
+    @Args({ name: 'limit', type: () => Int, defaultValue: config.defaultPageLimit }) limit: number,
+  ) {
+    return this.productsService.getProducts({ page, limit });
+  }
+
+  @Query(() => Number, { name: 'count' })
+  async getCount() {
+    return this.productsService.getCount({});
   }
 
   @Mutation(() => Product)

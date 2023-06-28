@@ -20,8 +20,15 @@ export class ProductsRepository {
     where?: Prisma.ProductWhereInput;
     orderBy?: Prisma.ProductOrderByWithRelationInput;
   }): Promise<Product[]> {
-    const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.product.findMany({ skip, take, cursor, where, orderBy });
+    return this.prisma.product.findMany(params)
+  }
+
+  async getCount(params?: {
+    cursor?: Prisma.ProductWhereUniqueInput;
+    where?: Prisma.ProductWhereInput;
+    orderBy?: Prisma.ProductOrderByWithRelationInput;
+  }): Promise<Number> {
+    return this.prisma.product.count(params);
   }
 
   async createProduct(data: Prisma.ProductCreateInput): Promise<Product> {
