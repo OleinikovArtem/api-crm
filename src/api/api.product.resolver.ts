@@ -31,7 +31,10 @@ export class ApiProductResolver {
     @Args({ name: 'description', type: () => String }) description: string,
     @Args({ name: 'price', type: () => Float }) price: number,
     @Args({ name: 'count', type: () => Int }) count: number,
+
+    @Args({ name: 'categories', type: () => [String], nullable: true }) categories?: string[],
   ) {
-    return this.productsService.createProduct({ name, count, price, description });
+    console.log({ categories });
+    return this.productsService.createProduct({ name, count, price, description, categories });
   }
 }

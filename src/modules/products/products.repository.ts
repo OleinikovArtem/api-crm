@@ -20,7 +20,7 @@ export class ProductsRepository {
     where?: Prisma.ProductWhereInput;
     orderBy?: Prisma.ProductOrderByWithRelationInput;
   }): Promise<Product[]> {
-    return this.prisma.product.findMany(params)
+    return this.prisma.product.findMany({ ...params, include: { categories: true } })
   }
 
   async getCount(params?: {
