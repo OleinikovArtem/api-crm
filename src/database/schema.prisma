@@ -58,12 +58,13 @@ model Category {
 }
 
 model Order {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id        String       @id @default(uuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
   userId    String?
-  customer  User?     @relation(fields: [userId], references: [id])
+  customer  User?        @relation(fields: [userId], references: [id])
   products  Product[]
+  status    ORDER_STATUS @default(CREATED)
 }
 
 model Asset {
@@ -110,4 +111,11 @@ enum ROLE {
   ADMIN
   EMPLOYEE
   CLIENT
+}
+
+enum ORDER_STATUS {
+  CREATED
+  PAYMENTED
+  IN_PROGRESS
+  COMPLETED
 }

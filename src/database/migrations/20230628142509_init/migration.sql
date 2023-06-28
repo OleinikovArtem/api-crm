@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "ROLE" AS ENUM ('ADMIN', 'EMPLOYEE', 'CLIENT');
 
+-- CreateEnum
+CREATE TYPE "ORDER_STATUS" AS ENUM ('CREATED', 'PAYMENTED', 'IN_PROGRESS', 'COMPLETED');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -47,6 +50,7 @@ CREATE TABLE "Order" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT,
+    "status" "ORDER_STATUS" NOT NULL DEFAULT 'CREATED',
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );
