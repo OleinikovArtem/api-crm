@@ -8,6 +8,7 @@ import { MinioClientModule } from './modules/minio-client/minio-client.module';
 
 import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { FileUploadModule } from './modules/file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
     MinioClientModule,
     ProductsModule,
     CategoriesModule,
+    FileUploadModule,
   ],
   controllers: [],
   providers: [],
