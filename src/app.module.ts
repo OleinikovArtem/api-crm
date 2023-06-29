@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { PrismaModule } from './database/prisma.module';
+import { MinioClientModule } from './modules/minio-client/minio-client.module';
 
 import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
@@ -15,6 +16,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
       autoSchemaFile: true,
     }),
     PrismaModule,
+    MinioClientModule,
     ProductsModule,
     CategoriesModule,
   ],
