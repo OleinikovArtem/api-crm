@@ -5,20 +5,32 @@ import { BufferedFile } from 'src/modules/minio-client/file.model';
 @Injectable()
 export class FileUploadService {
   constructor(
-    private minioClientService: MinioClientService
-  ) {}
+    private minioClientService: MinioClientService,
+  ) {
+  }
 
-  async uploadSingle(image: BufferedFile) {
-    const uploaded_image = await this.minioClientService.upload(image)
-    let image_url = uploaded_image.url
+  async uploadSingle(file: BufferedFile) {
+    try {
+      const uploaded_file = await this.minioClientService.upload(file);
+      let file_url = uploaded_file.url;
 
-    if (process.env.NODE_ENV !== 'development') {
-      image_url = 'http://localhost' + image_url.slice(5)
+      if (process.env.NODE_ENV !== 'development') {
+        file_url = 'http://localhost' + file_url.slice(5);
+      }
+
+      return {
+        file_url,
+        message: 'Successfully uploaded to MinIO S3',
+      };
+    } catch (error) {
+      console.log(error);
+      throw new error
     }
+  }
 
-    return {
-      image_url,
-      message: "Successfully uploaded to MinIO S3"
-    }
+  async uploadMultiple(images: BufferedFile[]) {
+    return Promise.allSettled(
+      images.map(image => this.uploadSingle(image)),
+    );
   }
 }

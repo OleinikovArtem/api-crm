@@ -1,7 +1,7 @@
 import { Injectable, Logger, HttpException, HttpStatus } from '@nestjs/common';
 import { MinioService } from 'nestjs-minio-client';
 
-import { config } from './config';
+import { minioConfig } from 'src/config/minio-config';
 import { BufferedFile } from './file.model';
 
 import * as crypto from 'crypto';
@@ -9,7 +9,7 @@ import * as crypto from 'crypto';
 @Injectable()
 export class MinioClientService {
   private readonly logger: Logger;
-  private readonly baseBucket = config.MINIO_BUCKET;
+  private readonly baseBucket = minioConfig.MINIO_BUCKET || 'bucket';
 
   public get client() {
     return this.minio.client;
@@ -43,7 +43,7 @@ export class MinioClientService {
     });
 
     return {
-      url: `${config.MINIO_ENDPOINT}:${config.MINIO_PORT}/${config.MINIO_BUCKET}/${filename}`,
+      url: `${minioConfig.MINIO_ENDPOINT}:${minioConfig.MINIO_PORT}/${minioConfig.MINIO_BUCKET}/${filename}`,
     };
   }
 
