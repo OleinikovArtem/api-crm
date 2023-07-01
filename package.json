@@ -8,6 +8,8 @@
     "schema": "src/database/schema.prisma"
   },
   "scripts": {
+    "dev": "docker-compose up",
+    "dev:clean": "docker-compose up --build -V",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

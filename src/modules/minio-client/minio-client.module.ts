@@ -9,8 +9,8 @@ import { minioConfig } from 'src/config/minio-config'
       endPoint: minioConfig.MINIO_ENDPOINT,
       port: minioConfig.MINIO_PORT,
       useSSL: false,
-      accessKey: minioConfig.MINIO_ACCESSKEY,
-      secretKey: minioConfig.MINIO_SECRETKEY,
+      accessKey: minioConfig.MINIO_ACCESS_KEY,
+      secretKey: minioConfig.MINIO_SECRET_KEY,
     })
   ],
   providers: [MinioClientService],

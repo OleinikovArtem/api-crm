@@ -8,14 +8,15 @@ import { BufferedFile } from 'src/modules/minio-client/file.model';
 @Controller('file-upload')
 export class FileUploadController {
   constructor(
-    private fileUploadService: FileUploadService
-  ) {}
+    private fileUploadService: FileUploadService,
+  ) {
+  }
 
   @Post('single')
   @UseInterceptors(FileInterceptor('image'))
   async uploadSingle(
-    @UploadedFile() image: BufferedFile
+    @UploadedFile() image: BufferedFile,
   ) {
-    return await this.fileUploadService.uploadSingle(image)
+    return await this.fileUploadService.uploadSingle(image);
   }
 }
