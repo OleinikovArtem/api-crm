@@ -17,13 +17,8 @@ Then open http://localhost:9001 - there is admin panel for local file-bucket
 `MINIO_ROOT_USER="minioadmin"
 MINIO_ROOT_PASSWORD="minioadmin"`
 
-Then choose the bucket => anonymous => Add Access Rule 
-```json
-{
-    "prefix": "/",
-    "access": "readonly"
-}
-```
+**Then** choose the AccessKeys => create Access keys and save it to `.env` file
+then restart your app `docker-compose down` -> `docker-compose up`
 
 And now you will be able to see the image that you uploaded to the bucket.
 
