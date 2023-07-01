@@ -39,10 +39,11 @@ export class ProductResolver {
   async createProduct(
     @Args({ name: 'name', type: () => String }) name: string,
     @Args({ name: 'description', type: () => String }) description: string,
+    @Args({ name: 'imageUrl', type: () => String }) imageUrl: string,
     @Args({ name: 'price', type: () => Float }) price: number,
     @Args({ name: 'count', type: () => Int }) count: number,
     @Args({ name: 'categories', type: () => [String || null || undefined], nullable: true }) categories?: string[],
   ) {
-    return this.productsService.createProduct({ name, count, price, description, categories });
+    return this.productsService.createProduct({ name, count, price, description, categories, imageUrl });
   }
 }

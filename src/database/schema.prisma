@@ -43,6 +43,7 @@ model Product {
   assets      Asset[]
   orders      Order[]
   categories  Category[]
+  imageUrl    String?
 
   @@index([name])
 }

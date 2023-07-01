@@ -19,6 +19,9 @@ export class Product {
   @Field(() => String)
   description: ProductDB['description'];
 
+  @Field(() => String)
+  imageUrl: ProductDB['imageUrl'];
+
   @Field(() => Float)
   price: ProductDB['price'];
 

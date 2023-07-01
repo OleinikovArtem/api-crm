@@ -12,12 +12,14 @@ export class ProductsService {
     description: Product['description'],
     price: Product['price'],
     count: Product['count'],
+    imageUrl: Product['imageUrl']
     categories?: string[],
   }) {
-    const { name, count, description, price, categories } = params;
+    const { categories, ...data } = params;
 
     return this.repository.createProduct({
-      name, count, description, price, categories: {
+      ...data,
+      categories: {
         connectOrCreate: categories?.map((category) => {
           return {
             where: { name: category },
