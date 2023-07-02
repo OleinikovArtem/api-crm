@@ -9,6 +9,7 @@
 
 Run docker container (Don't forget to run the docker application first)
 ```cmd
+docker volume create minio-volume (for create bucket for minio files)
 docker-compose up --build -V  (everything will be cleaned up as first start)
 docker-compose up (for everyday use)
 ```

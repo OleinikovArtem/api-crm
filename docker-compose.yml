@@ -17,6 +17,7 @@ services:
       - 3000:3000
     depends_on:
       - postgres
+      - minio
 
   postgres:
     image: postgres
@@ -41,7 +42,7 @@ services:
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
       - MINIO_DEFAULT_BUCKETS=${MINIO_BUCKET}:public
     volumes:
-      - minio:/var/lib/minio/data
+      - minio-volume:/data
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
       interval: 30s
@@ -51,5 +52,6 @@ services:
 
 volumes:
   postgres:
-  minio:
-    driver: local
+  minio-volume:
+    external: true
+
