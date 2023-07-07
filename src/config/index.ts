@@ -1,3 +1,4 @@
-import { minio_config } from './minio-config';
+import { minioConfig } from './minio.config';
+import { authConfig } from './auth.config';
 
-export const configurations = [minio_config];
+export const configurations = [minioConfig, authConfig];

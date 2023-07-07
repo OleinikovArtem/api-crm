@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MinioClientService } from './minio-client.service';
 import { MinioModule } from 'nestjs-minio-client';
-import { minio_config } from 'src/config/minio-config'
+import { minioConfig } from 'src/config/minio.config'
 
-const { minio_endpoint, minio_bucket, minio_secret_key, minio_access_key, minio_port } = minio_config()
+const { minio_endpoint, minio_secret_key, minio_access_key, minio_port } = minioConfig()
 
 @Module({
   imports: [
