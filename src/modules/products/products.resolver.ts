@@ -12,7 +12,7 @@ export class ProductResolver {
   constructor(private readonly productsService: ProductsService) {
   }
 
-  @Query(() => Number, { name: 'count' })
+  @Query(() => Number, { name: 'countProducts' })
   async getCount(
     @Args({ name: 'categories', type: () => [String], defaultValue: [] }) categories?: string[],
   ) {
