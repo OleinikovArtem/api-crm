@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductsRepository } from './products.repository';
-import { Product } from '@prisma/client';
+import { Prisma, Product } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
@@ -11,16 +11,54 @@ export class ProductsService {
     name: Product['name'],
     description: Product['description'],
     price: Product['price'],
-    count: Product['count']
+    count: Product['count'],
+    imageUrl: Product['imageUrl']
+    categories?: string[],
   }) {
-    const { name, count, description, price } = params;
+    const { categories, ...data } = params;
 
-    return this.repository.createProduct({ name, count, description, price });
+    return this.repository.createProduct({
+      ...data,
+      categories: {
+        connectOrCreate: categories?.map((category) => {
+          return {
+            where: { name: category },
+            create: { name: category },
+          };
+        }),
+      },
+    });
   }
 
-  async getProducts(params: { page?: number, limit?: number }) {
-    const { page = 1, limit = 10 } = params;
+  async getProductById(id: string) {
+    return this.repository.getProductById(id);
+  }
 
-    return this.repository.getProducts({ skip: (page - 1) * limit, take: limit });
+  async getCount({ categories }: { categories?: string[] } = {}) {
+    const where: Prisma.ProductWhereInput = {};
+    if (categories?.length) {
+      where.categories = this.createCategoryListRelationFilter(categories);
+    }
+
+    return this.repository.getCount({ where });
+  }
+
+  async getProducts(params: { page: number, limit: number, categories?: string[] }) {
+    const { page, limit, categories } = params;
+    const where: Prisma.ProductWhereInput = {};
+
+    if (categories?.length) {
+      where.categories = this.createCategoryListRelationFilter(categories);
+    }
+
+    return this.repository.getProducts({
+      skip: (page - 1) * limit,
+      take: limit,
+      where,
+    });
+  }
+
+  private createCategoryListRelationFilter(categories: string[]) {
+    return { some: { OR: categories?.map(category => ({ name: category })) } };
   }
 }

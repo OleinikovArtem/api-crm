@@ -8,7 +8,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -18,7 +18,7 @@ model User {
   email         String    @unique
   emailVerified DateTime?
   /// @TypeGraphQL.omit(output: true, input: true)
-  password      String?
+  password      String
   image         String?
   name          String?
   phone         String?
@@ -43,6 +43,7 @@ model Product {
   assets      Asset[]
   orders      Order[]
   categories  Category[]
+  imageUrl    String?
 
   @@index([name])
 }
@@ -58,12 +59,13 @@ model Category {
 }
 
 model Order {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id        String       @id @default(uuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
   userId    String?
-  customer  User?     @relation(fields: [userId], references: [id])
+  customer  User?        @relation(fields: [userId], references: [id])
   products  Product[]
+  status    ORDER_STATUS @default(CREATED)
 }
 
 model Asset {
@@ -73,7 +75,7 @@ model Asset {
   name      String
   url       String
   productId String
-  products  Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
 }
 
 model Account {
@@ -110,4 +112,11 @@ enum ROLE {
   ADMIN
   EMPLOYEE
   CLIENT
+}
+
+enum ORDER_STATUS {
+  CREATED
+  PAYMENTED
+  IN_PROGRESS
+  COMPLETED
 }
