@@ -1,22 +1,18 @@
 ## Order
-
-[ ] createOrder({ productId, count }[])
-[ ] updateOrder({ address, fullName, phone, })
-
-[ ] createPayment(orderId)
-[ ] confirmPayment(confirmData)
-
-[ ] getOrderById(orderId)
-[ ] getUserOrdersByEmail(email)
+- [ ] createOrder({ productId, count }[])
+- [ ] updateOrder({ address, fullName, phone, })
+- [ ] createPayment(orderId)
+- [ ] confirmPayment(confirmData)
+- [ ] getOrderById(orderId)
+- [ ] getUserOrdersByEmail(email)
 
 
-## User
+## Auth
+- [x] registration({ email, password, fullName, address? }): tokens
+- [x] login({ email, password }): tokens
 
-`interface User { address, fillname, phone, orders, ... }`
-
-[X] getUser(): User `by token`
-[ ] getUserByID(): User
-
-[X] registration({ email, password, fullName, address? }): tokens
-[X] login({ email, password }): tokens
-
+## Products
+- [x] createProduct(...)
+- [x] getProducts(categories, limit, page)
+- [x] countProducts(categories)
+- [x] getCategories
