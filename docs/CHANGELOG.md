@@ -1,7 +1,15 @@
 ### [EXAMPLE](CHANGELOG_EXAMPLE.md) !always should be on the TOP!
 
 ----
+## Changes: 09/07/2023
+
+### Added:
+- Added base for development `Order` module,
+- Added GQL model for `Order` 
+
+----
 ## Changes: 08/07/2023
+### Changed:
 from:
 ```graphql
 query getProducts($categories: [String!], $limit: Int, $page: Int) {

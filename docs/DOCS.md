@@ -6,7 +6,6 @@
 - [ ] getOrderById(orderId)
 - [ ] getUserOrdersByEmail(email)
 
-
 ## Auth
 - [x] registration({ email, password, fullName, address? }): tokens
 - [x] login({ email, password }): tokens

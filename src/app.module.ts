@@ -14,6 +14,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 
 import { configurations } from './config';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { configurations } from './config';
     FileUploadModule,
     AuthModule,
     UsersModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [],
