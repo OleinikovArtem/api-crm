@@ -9,7 +9,7 @@ export class UsersRepository {
 
   async findOne({ email, id }: Prisma.UserWhereUniqueInput) {
     if (!email && !id) return null
-    const where = {} as Record<string, string>
+    const where = {} as Prisma.UserWhereUniqueInput
 
     if (id) {
       where.id = id
