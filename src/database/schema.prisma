@@ -33,15 +33,15 @@ model User {
 }
 
 model Product {
-  id          String     @id @default(uuid())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id          String         @id @default(uuid())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
   name        String
   price       Float
   count       Int
   description String?
   assets      Asset[]
-  orders      Order[]
+  orders      OrderProduct[]
   categories  Category[]
   imageUrl    String?
 
@@ -58,14 +58,39 @@ model Category {
   @@index([name])
 }
 
+model OrderProduct {
+  id        String  @id @default(uuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  count     Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+}
+
 model Order {
-  id        String       @id @default(uuid())
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id        String         @id @default(uuid())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
   userId    String?
-  customer  User?        @relation(fields: [userId], references: [id])
-  products  Product[]
-  status    ORDER_STATUS @default(CREATED)
+  customer  User?          @relation(fields: [userId], references: [id])
+  products  OrderProduct[]
+  status    ORDER_STATUS   @default(CREATED)
+
+  billingInfo BillingInfo?
+  code        Int          @unique @default(autoincrement())
+}
+
+model BillingInfo {
+  id          String  @id @default(uuid())
+  order       Order   @relation(fields: [orderId], references: [id])
+  orderId     String  @unique
+  fullName    String
+  bio         String?
+  houseNumber String
+  street      String
+  city        String
+  postalCode  String?
+  country     String?
 }
 
 model Asset {

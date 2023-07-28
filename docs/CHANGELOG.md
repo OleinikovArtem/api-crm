@@ -1,5 +1,59 @@
 ### [EXAMPLE](CHANGELOG_EXAMPLE.md) !always should be on the TOP!
 
+
+----
+## Changes: 28/08/2023
+
+### Added:
+
+```graphql
+mutation createOrder(
+    $products: [OrderProductInput!]!
+    $billingInfo: OrderBillingInfoInput!
+) {
+    createOrder(billingInfo: $billingInfo, products: $products) {
+        status
+        ...
+        products {
+            id
+            ...
+        }
+    }
+}
+
+
+```
+```graphql
+query getOrders($limit: Int, $page: Int) {
+    orders(limit: $limit, page: $page) {
+        id
+        status
+        billingInfo {
+            fullName
+            id
+            bio
+            country
+            city
+            street
+            houseNumber
+            postalCode
+        }
+        products {
+            id
+            productId
+            count
+            product {
+                price
+                imageUrl
+                id
+                description
+            }
+        }
+    }
+}
+```
+
+
 ----
 ## Changes: 09/07/2023
 
