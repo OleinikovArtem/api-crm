@@ -25,6 +25,28 @@ And now you will be able to see the image that you uploaded to the bucket.
 
 ---
 
+# Migrations
+
+To create a database migration, you need to run the database and then change this:
+```
+POSTGRES_HOST="postgres"
+POSTGRES_PORT="5432"
+```
+to this:
+```
+POSTGRES_HOST="localhost"
+POSTGRES_PORT="5433" - it should be (left value) from postgers.ports in the docker-compose.yml file
+```
+
+then 
+```
+npx prisma migration --name MIGRATION-NAME
+```
+
+
+
+---
+
 # ERRORS AND SOLUTIONS
 
 ---

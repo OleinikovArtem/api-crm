@@ -13,7 +13,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "prisma migrate dev && npx prisma generate && npx prisma migrate dev && nest start --watch NODE_ENV=development",
+    "start:dev": "npx prisma migrate dev --name rename-address-to-billingInfo && npx prisma generate && nest start --watch NODE_ENV=development",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "generate": "npx prisma generate",

@@ -1,8 +1,9 @@
 ## Order
-- [ ] createOrder({ productId, count }[])
+- [x] createOrder({ productId, count }[])
 - [ ] updateOrder({ address, fullName, phone, })
 - [ ] createPayment(orderId)
 - [ ] confirmPayment(confirmData)
+- [x] getOrders()
 - [ ] getOrderById(orderId)
 - [ ] getUserOrdersByEmail(email)
 
