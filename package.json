@@ -1,6 +1,6 @@
 {
   "name": "Nest-Api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Artem Oleinikov <artem.oleinikov.web@gmail.com>",
   "private": true,
   "license": "UNLICENSED",
@@ -13,7 +13,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "npx prisma migrate dev --name rename-address-to-billingInfo && npx prisma generate && nest start --watch NODE_ENV=development",
+    "start:dev": "npx prisma migrate dev && npx prisma generate && nest start --watch NODE_ENV=development",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "generate": "npx prisma generate",
