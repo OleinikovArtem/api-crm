@@ -3,6 +3,7 @@ import { OrdersRepository } from './orders.repository';
 import { Prisma } from '@prisma/client';
 import { CreateOrderArgs } from './dto/createOrder.args';
 import { ProductsService } from '../products/products.service';
+import { GetOrdersArgs } from './dto/getOrders.args';
 
 @Injectable()
 export class OrdersService {
@@ -34,7 +35,7 @@ export class OrdersService {
     });
   }
 
-  async getOrders(params: { page: number, limit: number }) {
+  async getOrders(params: GetOrdersArgs) {
     const { page, limit } = params;
     const where: Prisma.OrderWhereInput = {
     };
