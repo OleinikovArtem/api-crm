@@ -1,8 +1,40 @@
-### [EXAMPLE](CHANGELOG_EXAMPLE.md) !always should be on the TOP!
+### [EXAMPLE](CHANGELOG_EXAMPLE.md) !Always should be on the TOP!
 
 
 ----
-## Changes: 28/08/2023
+## Changes: 13/08/2023
+### Changed:
+from:
+```graphql
+query getProducts($categories: [String!], $limit: Int, $page: Int) {
+    countProducts(categories: $categories)
+    products(limit: $limit, page: $page, categories: $categories) {
+        id
+    }
+}
+```
+
+to:
+```graphql
+query getProducts($categories: [String!], $limit: Int, $page: Int) {
+    products(limit: $limit, page: $page, categories: $categories) {
+        totalCount
+        items {
+            id
+            name
+            description
+            count
+            price
+            categories {
+                name
+            }
+        }
+    }
+}
+```
+
+----
+## Changes: 28/07/2023
 
 ### Added:
 

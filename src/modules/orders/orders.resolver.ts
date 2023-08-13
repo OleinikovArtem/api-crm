@@ -6,12 +6,6 @@ import { Order } from './models/order.model';
 import { GetOrdersArgs } from './dto/getOrders.args';
 import { CreateOrderArgs } from './dto/createOrder.args';
 
-export const config = {
-  defaultPageLimit: 10,
-  defaultPage: 1,
-};
-
-
 @Resolver()
 export class OrdersResolver {
   constructor(private orderService: OrdersService) {
