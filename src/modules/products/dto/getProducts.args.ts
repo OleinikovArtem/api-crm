@@ -1,6 +1,8 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { PaginationArgs } from '../../common/pagination/pagination.args';
-import { GeneratePaginationOutput } from '../../common/pagination/pagination.output';
+
+import { PaginationArgs } from '@pagination/pagination.args';
+import { GeneratePaginationOutput } from '@pagination/pagination.output';
+
 import { Product } from '../products.model';
 
 @ArgsType()

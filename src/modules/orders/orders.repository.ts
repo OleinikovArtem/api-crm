@@ -28,6 +28,14 @@ export class OrdersRepository {
     return this.prisma.order.findMany({ where: { customer: { email } }, include: { products: true } });
   }
 
+  async getCount(params?: {
+    cursor?: Prisma.OrderWhereUniqueInput;
+    where?: Prisma.OrderWhereInput;
+    orderBy?: Prisma.OrderOrderByWithRelationInput;
+  }): Promise<number> {
+    return this.prisma.order.count(params);
+  }
+
   getOrders(params: {
     skip?: number;
     take?: number;

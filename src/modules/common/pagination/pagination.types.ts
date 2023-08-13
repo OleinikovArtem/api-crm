@@ -1,4 +1,6 @@
 export interface PaginationOutput<T> {
-  totalCount: number,
-  items: T[]
+  totalCount: number;
+  totalPages: number;
+  currentPage: number;
+  items: T[];
 }

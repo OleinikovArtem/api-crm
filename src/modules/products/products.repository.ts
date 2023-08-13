@@ -25,7 +25,7 @@ export class ProductsRepository {
     cursor?: Prisma.ProductWhereUniqueInput;
     where?: Prisma.ProductWhereInput;
     orderBy?: Prisma.ProductOrderByWithRelationInput;
-  }): Promise<Number> {
+  }): Promise<number> {
     return this.prisma.product.count(params);
   }
 
