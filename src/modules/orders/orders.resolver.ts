@@ -3,7 +3,7 @@ import { OrdersService } from './orders.service';
 
 // models
 import { Order } from './models/order.model';
-import { GetOrdersArgs } from './dto/getOrders.args';
+import { GetOrdersWithPaginationArgs, OrderOutput } from './dto/getOrders.args';
 import { CreateOrderArgs } from './dto/createOrder.args';
 
 @Resolver()
@@ -11,8 +11,8 @@ export class OrdersResolver {
   constructor(private orderService: OrdersService) {
   }
 
-  @Query(() => [Order], { name: 'orders' })
-  async getOrders(@Args() args: GetOrdersArgs) {
+  @Query(() => OrderOutput, { name: 'orders' })
+  async getOrders(@Args() args: GetOrdersWithPaginationArgs) {
     return this.orderService.getOrders(args);
   }
 

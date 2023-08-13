@@ -1,6 +1,6 @@
 import { Field, Float, GraphQLISODateTime, Int, ObjectType } from '@nestjs/graphql';
 import { Product as ProductDB } from '@prisma/client';
-import { Category } from 'src/modules/categories/categories.model';
+import { Category } from '@modules/categories/categories.model';
 
 @ObjectType()
 export class Product {

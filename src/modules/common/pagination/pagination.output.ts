@@ -7,10 +7,14 @@ export function GeneratePaginationOutput<T>(classRef: Type<T>) {
     @Field(type => Int)
     totalCount: number;
 
+    @Field(type => Int)
+    totalPages: number;
+
+    @Field(type => Int)
+    currentPage: number;
+
     @Field(type => [classRef])
     items?: T[];
-
-    // Other fields you might need, like totalPages, hasNextPage, etc.
   }
 
   Object.defineProperty(GenericPaginationOutput, 'name', {

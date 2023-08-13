@@ -1,4 +1,4 @@
-### [EXAMPLE](CHANGELOG_EXAMPLE.md) !Always should be on the TOP!
+### [EXAMPLE](CHANGELOG_EXAMPLE.md) !always should be on the TOP!
 
 
 ----
@@ -19,6 +19,8 @@ to:
 query getProducts($categories: [String!], $limit: Int, $page: Int) {
     products(limit: $limit, page: $page, categories: $categories) {
         totalCount
+        currentPage
+        totalPages
         items {
             id
             name
@@ -32,6 +34,74 @@ query getProducts($categories: [String!], $limit: Int, $page: Int) {
     }
 }
 ```
+### Changed:
+from:
+```graphql
+query getOrders($limit: Int, $page: Int) {
+    orders(limit: $limit, page: $page) {
+        id
+        status
+        billingInfo {
+            fullName
+            id
+            bio
+            country
+            city
+            street
+            houseNumber
+            postalCode
+        }
+        products {
+            id
+            productId
+            count
+            product {
+                price
+                imageUrl
+                id
+                description
+            }
+        }
+    }
+}
+```
+
+to:
+```graphql
+query getOrders($limit: Int, $page: Int) {
+    orders(limit: $limit, page: $page) {
+        totalCount
+        currentPage
+        totalPages
+        items {
+            id
+            status
+            billingInfo {
+                fullName
+                id
+                bio
+                country
+                city
+                street
+                houseNumber
+                postalCode
+            }
+            products {
+                id
+                productId
+                count
+                product {
+                    price
+                    imageUrl
+                    id
+                    description
+                }
+            }
+        }
+    }
+}
+```
+
 
 ----
 ## Changes: 28/07/2023

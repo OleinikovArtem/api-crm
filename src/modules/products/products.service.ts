@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { ProductsRepository } from './products.repository';
 import { Prisma, Product } from '@prisma/client';
+
 import { CreateProductArgs } from './dto/createProduct.args';
 import { GetProductsWithPaginationArgs } from './dto/getProducts.args';
-import { PaginationOutput } from '../common/pagination/pagination.types';
+
+import { PaginationOutput } from '@pagination/pagination.types';
+import { calculatePagination } from '@pagination/pagination.utils';
 
 @Injectable()
 export class ProductsService {
@@ -50,7 +53,7 @@ export class ProductsService {
 
     return {
       items,
-      totalCount: 1,
+      ...calculatePagination({ totalCount, limit, currentPage: page }),
     };
   }
 }
