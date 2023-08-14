@@ -11,6 +11,9 @@ export class OrderBillingInfoInput {
   fullName: BillingInfo['fullName'];
 
   @Field(() => String)
+  email: BillingInfo['email'];
+
+  @Field(() => String)
   houseNumber: BillingInfo['houseNumber'];
 
   @Field(() => String)

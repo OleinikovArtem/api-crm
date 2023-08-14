@@ -5,7 +5,7 @@
 - [ ] confirmPayment(confirmData)
 - [x] getOrders()
 - [ ] getOrderById(orderId)
-- [ ] getUserOrdersByEmail(email)
+- [x] getUserOrdersByEmail(email)
 
 ## Auth
 - [x] registration({ email, password, fullName, address? }): tokens

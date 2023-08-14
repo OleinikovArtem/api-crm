@@ -1,9 +1,8 @@
 {
-  "name": "Nest-Api",
-  "version": "0.0.2",
+  "name": "crm-api",
+  "version": "0.0.3",
   "author": "Artem Oleinikov <artem.oleinikov.web@gmail.com>",
   "private": true,
-  "license": "UNLICENSED",
   "prisma": {
     "schema": "src/database/schema.prisma"
   },

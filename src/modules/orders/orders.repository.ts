@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
+import { PrismaService } from '@/database/prisma.service';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -8,12 +8,10 @@ export class OrdersRepository {
   }
 
   async createOrder(data: Prisma.OrderCreateInput) {
-    const order = await this.prisma.order.create({
+    return this.prisma.order.create({
       data,
       include: { products: { include: { product: true } }, billingInfo: true, customer: true },
     });
-    console.log(order);
-    return order;
   }
 
   updateOrderById(id: string, data: Prisma.OrderUpdateInput) {
@@ -22,10 +20,6 @@ export class OrdersRepository {
 
   getOrderById(id: string) {
     return this.prisma.order.findFirstOrThrow({ where: { id }, include: { products: true } });
-  }
-
-  getOrdersByEmail(email: string) {
-    return this.prisma.order.findMany({ where: { customer: { email } }, include: { products: true } });
   }
 
   async getCount(params?: {

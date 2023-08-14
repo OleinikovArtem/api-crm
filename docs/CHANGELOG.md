@@ -1,10 +1,53 @@
-### [EXAMPLE](CHANGELOG_EXAMPLE.md) !always should be on the TOP!
-
+### [EXAMPLE](CHANGELOG_EXAMPLE.md) !Always should be on the TOP!
 
 ----
-## Changes: 13/08/2023
+
+## Changes: 14/08/2023
+
 ### Changed:
+Added Email to order.billingInfo , and Also when the order is creating you should add email to BillingInfo
+
 from:
+```graphql
+query getOrders($limit: Int, $page: Int) { 
+    orders(limit: $limit, page: $page) {
+        id
+        status
+        billingInfo {
+            id
+        }
+        products {
+            id
+        }
+    }
+}
+```
+
+to:
+```graphql
+query getOrders($limit: Int, $page: Int, $email: String) {
+    orders(limit: $limit, page: $page, email: $email) {
+        id
+        status
+        billingInfo {
+            id
+            email
+        }
+        products {
+            id
+        }
+    }
+}
+```
+
+----
+
+## Changes: 13/08/2023
+
+### Changed:
+
+from:
+
 ```graphql
 query getProducts($categories: [String!], $limit: Int, $page: Int) {
     countProducts(categories: $categories)
@@ -15,6 +58,7 @@ query getProducts($categories: [String!], $limit: Int, $page: Int) {
 ```
 
 to:
+
 ```graphql
 query getProducts($categories: [String!], $limit: Int, $page: Int) {
     products(limit: $limit, page: $page, categories: $categories) {
@@ -34,8 +78,11 @@ query getProducts($categories: [String!], $limit: Int, $page: Int) {
     }
 }
 ```
+
 ### Changed:
+
 from:
+
 ```graphql
 query getOrders($limit: Int, $page: Int) {
     orders(limit: $limit, page: $page) {
@@ -67,6 +114,7 @@ query getOrders($limit: Int, $page: Int) {
 ```
 
 to:
+
 ```graphql
 query getOrders($limit: Int, $page: Int) {
     orders(limit: $limit, page: $page) {
@@ -102,8 +150,8 @@ query getOrders($limit: Int, $page: Int) {
 }
 ```
 
-
 ----
+
 ## Changes: 28/07/2023
 
 ### Added:
@@ -117,14 +165,15 @@ mutation createOrder(
         status
         ...
         products {
-            id
-            ...
+          id
+          ...
         }
     }
 }
 
 
 ```
+
 ```graphql
 query getOrders($limit: Int, $page: Int) {
     orders(limit: $limit, page: $page) {
@@ -155,18 +204,23 @@ query getOrders($limit: Int, $page: Int) {
 }
 ```
 
-
 ----
+
 ## Changes: 09/07/2023
 
 ### Added:
+
 - Added base for development `Order` module,
-- Added GQL model for `Order` 
+- Added GQL model for `Order`
 
 ----
+
 ## Changes: 08/07/2023
+
 ### Changed:
+
 from:
+
 ```graphql
 query getProducts($categories: [String!], $limit: Int, $page: Int) {
     count(categories: $categories)
@@ -175,7 +229,9 @@ query getProducts($categories: [String!], $limit: Int, $page: Int) {
     }
 }
 ``` 
+
 to:
+
 ```graphql
 query getProducts($categories: [String!], $limit: Int, $page: Int) {
     countProducts(categories: $categories) // <-- CHANGED
@@ -186,9 +242,11 @@ query getProducts($categories: [String!], $limit: Int, $page: Int) {
 ```
 
 ----
+
 ## Changes: 07/07/2023
 
 ### Added:
+
 ```graphql
 mutation registration($email: String!, $password: String!, $name: String!) {
     registration(email: $email, password: $password, name: $name) {
@@ -198,6 +256,7 @@ mutation registration($email: String!, $password: String!, $name: String!) {
 }
 
 ```
+
 ```graphql
 mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -208,9 +267,11 @@ mutation login($email: String!, $password: String!) {
 ```
 
 ----
+
 ## Changes: 25/06/2023
 
 ### Added:
+
 ```graphql
 mutation createProduct(
     $name: String!

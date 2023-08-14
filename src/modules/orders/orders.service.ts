@@ -1,9 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { OrdersRepository } from './orders.repository';
 import { Order, Prisma } from '@prisma/client';
-import { CreateOrderArgs } from './dto/createOrder.args';
+
 import { ProductsService } from '../products/products.service';
+import { OrdersRepository } from './orders.repository';
+
+import { CreateOrderArgs } from './dto/createOrder.args';
 import { GetOrdersWithPaginationArgs } from './dto/getOrders.args';
+
 import { PaginationOutput } from '@pagination/pagination.types';
 import { calculatePagination } from '@pagination/pagination.utils';
 
@@ -39,8 +42,12 @@ export class OrdersService {
 
 
   async getOrders(params: GetOrdersWithPaginationArgs): Promise<PaginationOutput<Order>> {
-    const { page, limit } = params;
+    const { page, limit, email } = params;
     const where: Prisma.OrderWhereInput = {};
+
+    if (email) {
+      where.billingInfo = { email };
+    }
 
     const itemsReq = this.repository.getOrders({
       skip: (page - 1) * limit,

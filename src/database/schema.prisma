@@ -91,6 +91,7 @@ model BillingInfo {
   city        String
   postalCode  String?
   country     String?
+  email       String
 }
 
 model Asset {
