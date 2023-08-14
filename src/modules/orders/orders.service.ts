@@ -41,6 +41,10 @@ export class OrdersService {
   }
 
 
+  async getOrderById(id: string) {
+    return this.repository.getOrderById(id);
+  }
+
   async getOrders(params: GetOrdersWithPaginationArgs): Promise<PaginationOutput<Order>> {
     const { page, limit, email } = params;
     const where: Prisma.OrderWhereInput = {};

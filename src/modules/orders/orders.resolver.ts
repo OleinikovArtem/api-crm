@@ -16,6 +16,11 @@ export class OrdersResolver {
     return this.orderService.getOrders(args);
   }
 
+  @Query(() => Order, { name: 'order' })
+  async getOrder(@Args() id: string) {
+    return this.orderService.getOrderById(id);
+  }
+
 
   @Mutation(() => Order)
   async createOrder(@Args() args: CreateOrderArgs) {

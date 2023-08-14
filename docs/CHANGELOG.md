@@ -4,6 +4,22 @@
 
 ## Changes: 14/08/2023
 
+### Added:
+```graphql
+query getOrderById($id: String) {
+    order(id: $id) {
+        id
+        status
+        billingInfo {
+            id
+        }
+        products {
+            id
+        }
+    }
+}
+```
+
 ### Changed:
 Added Email to order.billingInfo , and Also when the order is creating you should add email to BillingInfo
 
