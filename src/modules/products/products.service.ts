@@ -3,6 +3,7 @@ import { ProductsRepository } from './products.repository';
 import { Prisma, Product } from '@prisma/client';
 
 import { CreateProductArgs } from './dto/createProduct.args';
+import { UpdateProductArgs } from '@modules/products/dto/updateProduct.args';
 import { GetProductsWithPaginationArgs } from './dto/getProducts.args';
 
 import { PaginationOutput } from '@pagination/pagination.types';
@@ -18,14 +19,16 @@ export class ProductsService {
 
     return this.repository.createProduct({
       ...data,
-      categories: {
-        connectOrCreate: categories?.map((category) => {
-          return {
-            where: { name: category },
-            create: { name: category },
-          };
-        }),
-      },
+      ...this.createConnectOrCreateObjectForCategories(categories),
+    });
+  }
+
+  async updateProduct(params: UpdateProductArgs) {
+    const { categories, id, ...data } = params;
+
+    return this.repository.updateProduct({
+      where: { id },
+      data: { ...data, ...this.createConnectOrCreateObjectForCategories(categories) },
     });
   }
 
@@ -54,6 +57,21 @@ export class ProductsService {
     return {
       items,
       ...calculatePagination({ totalCount, limit, currentPage: page }),
+    };
+  }
+
+  private createConnectOrCreateObjectForCategories(categories: string[] | undefined) {
+    if (!categories) return {};
+
+    return {
+      categories: {
+        connectOrCreate: categories?.map((category) => {
+          return {
+            where: { name: category },
+            create: { name: category },
+          };
+        }),
+      },
     };
   }
 }

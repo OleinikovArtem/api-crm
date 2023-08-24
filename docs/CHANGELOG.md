@@ -2,9 +2,52 @@
 
 ----
 
+## Changes: 24/08/2023
+
+- Added `isPublish` field to the Product schema.
+- Updated `"@prisma/client"` to ` "^5.0.0"`
+
+### Added:
+
+```graphql
+mutation updateProduct(
+    $id: String!
+    $name: String!
+    $description: String!
+    $count: Int!
+    $price: Float!
+    $categories: [String!]
+    $imageUrl: String!
+    $isPunlish: Boolean
+) {
+    updateProduct(
+        id: $id
+        isPublished: $isPunlish
+        name: $name
+        description: $description
+        price: $price
+        count: $count
+        categories: $categories
+        imageUrl: $imageUrl
+    ) {
+        name
+        description
+        id
+        count
+        imageUrl
+        categories {
+            name
+        }
+    }
+}
+```
+
+----
+
 ## Changes: 14/08/2023
 
 ### Added:
+
 ```graphql
 query getOrderById($id: String) {
     order(id: $id) {
@@ -21,11 +64,13 @@ query getOrderById($id: String) {
 ```
 
 ### Changed:
+
 Added Email to order.billingInfo , and Also when the order is creating you should add email to BillingInfo
 
 from:
+
 ```graphql
-query getOrders($limit: Int, $page: Int) { 
+query getOrders($limit: Int, $page: Int) {
     orders(limit: $limit, page: $page) {
         id
         status
@@ -40,6 +85,7 @@ query getOrders($limit: Int, $page: Int) {
 ```
 
 to:
+
 ```graphql
 query getOrders($limit: Int, $page: Int, $email: String) {
     orders(limit: $limit, page: $page, email: $email) {
@@ -181,10 +227,10 @@ mutation createOrder(
         status
         ...
         products {
-          id
-          ...
-        }
-    }
+    id
+    ...
+}
+}
 }
 
 

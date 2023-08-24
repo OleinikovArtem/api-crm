@@ -44,6 +44,7 @@ model Product {
   orders      OrderProduct[]
   categories  Category[]
   imageUrl    String?
+  isPublish   Boolean?       @default(false)
 
   @@index([name])
 }

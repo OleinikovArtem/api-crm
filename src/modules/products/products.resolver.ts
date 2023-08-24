@@ -1,9 +1,13 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ProductsService } from './products.service';
+
 import { Product } from './products.model';
+import { ProductsService } from './products.service';
+
+// DTO
 import { GetProductsWithPaginationArgs, ProductsOutput } from './dto/getProducts.args';
 import { GetProductArgs } from './dto/getProduct.args';
 import { CreateProductArgs } from './dto/createProduct.args';
+import { UpdateProductArgs } from './dto/updateProduct.args';
 
 @Resolver()
 export class ProductResolver {
@@ -23,5 +27,10 @@ export class ProductResolver {
   @Mutation(() => Product)
   async createProduct(@Args() args: CreateProductArgs) {
     return this.productsService.createProduct(args);
+  }
+
+  @Mutation(() => Product)
+  async updateProduct(@Args() args: UpdateProductArgs) {
+    return this.productsService.updateProduct(args);
   }
 }

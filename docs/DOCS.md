@@ -4,7 +4,7 @@
 - [ ] createPayment(orderId)
 - [ ] confirmPayment(confirmData)
 - [x] getOrders()
-- [ ] getOrderById(orderId)
+- [x] getOrderById(orderId)
 - [x] getUserOrdersByEmail(email)
 
 ## Auth

@@ -17,7 +17,7 @@ export class OrdersResolver {
   }
 
   @Query(() => Order, { name: 'order' })
-  async getOrder(@Args() id: string) {
+  async getOrder(@Args('id') id: string) {
     return this.orderService.getOrderById(id);
   }
 

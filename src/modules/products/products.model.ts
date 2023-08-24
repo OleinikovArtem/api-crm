@@ -7,6 +7,9 @@ export class Product {
   @Field(() => String)
   id: ProductDB['id'];
 
+  @Field(() => Boolean)
+  isPublish: ProductDB['isPublish'];
+
   @Field(() => GraphQLISODateTime)
   createdAt: ProductDB['createdAt'];
 

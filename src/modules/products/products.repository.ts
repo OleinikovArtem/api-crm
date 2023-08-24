@@ -41,6 +41,7 @@ export class ProductsRepository {
     return this.prisma.product.update({
       data,
       where,
+      include: { categories: true },
     });
   }
 
