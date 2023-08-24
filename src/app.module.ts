@@ -5,16 +5,17 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { PrismaModule } from './database/prisma.module';
-import { MinioClientModule } from './modules/minio-client/minio-client.module';
-import { FileUploadModule } from './modules/file-upload/file-upload.module';
+import { MinioClientModule } from '@modules/minio-client/minio-client.module';
+import { FileUploadModule } from '@modules/file-upload/file-upload.module';
 
-import { AuthModule } from './modules/auth/auth.module';
-import { UsersModule } from './modules/users/users.module';
-import { ProductsModule } from './modules/products/products.module';
-import { CategoriesModule } from './modules/categories/categories.module';
+import { AuthModule } from '@modules/auth/auth.module';
+import { UsersModule } from '@modules/users/users.module';
+import { ProductsModule } from '@modules/products/products.module';
+import { CategoriesModule } from '@modules/categories/categories.module';
 
 import { configurations } from './config';
-import { OrdersModule } from './modules/orders/orders.module';
+import { OrdersModule } from '@modules/orders/orders.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [

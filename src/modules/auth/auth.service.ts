@@ -7,6 +7,7 @@ import { CreateTokensInput, SignInInput, SignUpInput, Tokens } from './auth.type
 
 
 import { authConfig } from 'src/config/auth.config';
+
 const { access_token_secret_key, refresh_token_secret_key } = authConfig();
 
 @Injectable()
@@ -57,7 +58,7 @@ export class AuthService {
   }
 
   private createPayloadForCreateTokens(user: User): CreateTokensInput {
-    const accessPayload = { sub: user.id, email: user.email, name: user.name };
+    const accessPayload = { sub: user.id, email: user.email, name: user.name, role: user.role } as const;
     const refreshPayload = { sub: user.id };
 
     return {
