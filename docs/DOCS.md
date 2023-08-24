@@ -13,6 +13,7 @@
 
 ## Products
 - [x] createProduct(...)
+- [x] updateProduct(...)
 - [x] getProducts(categories, limit, page)
 - [x] countProducts(categories)
 - [x] getCategories
