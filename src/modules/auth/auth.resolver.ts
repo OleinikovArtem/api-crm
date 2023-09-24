@@ -1,6 +1,8 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
+
 import { AuthResponse } from './tokens.model';
+import { User } from '@modules/users/user.model';
 
 @Resolver()
 export class AuthResolver {
@@ -22,5 +24,12 @@ export class AuthResolver {
     @Args({ name: 'name', type: () => String }) name: string,
   ) {
     return this.authService.singUp({ email, password, name });
+  }
+
+  @Mutation(() => User, { name: 'makeAdmin' })
+  async makeAdmin(
+    @Args({ name: 'email', type: () => String }) email: string,
+  ) {
+    return this.authService.makeAdmin(email);
   }
 }

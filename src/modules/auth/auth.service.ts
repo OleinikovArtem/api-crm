@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, BadRequestException, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
@@ -42,6 +42,17 @@ export class AuthService {
     const payload = this.createPayloadForCreateTokens(user);
 
     return await this.createTokens(payload);
+  }
+
+  // TODO remove
+  async makeAdmin(email: string) {
+    const user = await this.usersService.findByEmail(email);
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    return await this.usersService.makeAdmin(email);
   }
 
   private async createTokens({ refreshPayload, accessPayload }: CreateTokensInput): Promise<Tokens> {
