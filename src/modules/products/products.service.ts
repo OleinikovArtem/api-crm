@@ -49,6 +49,9 @@ export class ProductsService {
       skip: (page - 1) * limit,
       take: limit,
       where,
+      orderBy: {
+        createdAt: 'desc'
+      }
     });
     const totalCountReq = this.repository.getCount({ where });
 
