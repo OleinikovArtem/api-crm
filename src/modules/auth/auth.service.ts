@@ -44,6 +44,20 @@ export class AuthService {
     return await this.createTokens(payload);
   }
 
+  async refreshToken(token: string): Promise<Tokens> {
+    try {
+      const result = await this.jwtService.verify(token, { secret: refresh_token_secret_key });
+      const user = await this.usersService.findById(result.sub);
+
+      if (!user) throw new UnauthorizedException();
+
+      const payload = this.createPayloadForCreateTokens(user);
+      return await this.createTokens(payload);
+    } catch (e) {
+      throw new UnauthorizedException();
+    }
+  }
+
   // TODO remove
   async makeAdmin(email: string) {
     const user = await this.usersService.findByEmail(email);

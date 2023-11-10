@@ -11,6 +11,10 @@ export class UsersService {
     return this.repository.findOne({ email });
   }
 
+  async findById(id: string) {
+    return this.repository.findOne({ id });
+  }
+
   async createUser(inputData: { email: string, password: string, name: string }) {
     const password = await this.hashPassword(inputData.password);
     const data = { ...inputData, password };
