@@ -16,7 +16,7 @@ export const RoleGuard = (roles: ROLE[]): Type<CanActivate> => {
     }
 
     async canActivate(context: ExecutionContextHost): Promise<boolean> {
-      const request = context.getArgs()[2].req;
+      const request = context.getArgs()[2].req || { headers: context.getArgs()[0].headers };
       const token = this.extractTokenFromHeader(request);
       if (!token) {
         throw new UnauthorizedException();
@@ -43,7 +43,7 @@ export const RoleGuard = (roles: ROLE[]): Type<CanActivate> => {
     }
 
     private extractTokenFromHeader(request: Request): string | undefined {
-      const [type, token] = request?.headers?.authorization?.split(' ') ?? [];
+      const [type, token] = request?.headers?.authorization?.split(' ') || [];
       return type === 'Bearer' ? token : undefined;
     }
   }
