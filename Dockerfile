@@ -21,6 +21,7 @@ COPY --chown=node:node . .
 # Use the node user from the image (instead of the root user)
 USER node
 
+
 ###################
 # BUILD FOR PRODUCTION
 ###################

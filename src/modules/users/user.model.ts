@@ -30,6 +30,6 @@ export class User {
   @Field(() => String)
   phone: UserDB['phone'];
 
-  @Field(() => ROLE)
+  @Field(() => String)
   role: UserDB['role'];
 }

@@ -1,11 +1,11 @@
 ## Order
-- [ ] createOrder({ productId, count }[])
+- [x] createOrder({ productId, count }[])
 - [ ] updateOrder({ address, fullName, phone, })
 - [ ] createPayment(orderId)
 - [ ] confirmPayment(confirmData)
-- [ ] getOrderById(orderId)
-- [ ] getUserOrdersByEmail(email)
-
+- [x] getOrders()
+- [x] getOrderById(orderId)
+- [x] getUserOrdersByEmail(email)
 
 ## Auth
 - [x] registration({ email, password, fullName, address? }): tokens
@@ -13,6 +13,7 @@
 
 ## Products
 - [x] createProduct(...)
+- [x] updateProduct(...)
 - [x] getProducts(categories, limit, page)
 - [x] countProducts(categories)
 - [x] getCategories

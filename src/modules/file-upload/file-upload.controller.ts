@@ -1,6 +1,10 @@
 import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
+import { UseGuards } from '@nestjs/common';
+import { RoleGuard } from '@modules/auth/role.guard';
+import { ROLE } from '.prisma/client';
+
 import { FileUploadService } from './file-upload.service';
 
 import { BufferedFile } from 'src/modules/minio-client/file.model';
@@ -12,6 +16,8 @@ export class FileUploadController {
   ) {
   }
 
+
+  @UseGuards(RoleGuard([ROLE.ADMIN]))
   @Post('single')
   @UseInterceptors(FileInterceptor('image'))
   async uploadSingle(
