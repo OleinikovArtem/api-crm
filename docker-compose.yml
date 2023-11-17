@@ -14,7 +14,7 @@ services:
     # Run in dev Mode: npm run start:dev
     command: npm run start:dev
     ports:
-      - 3000:3000
+      - 8080:8080
     depends_on:
       - postgres
       - minio
@@ -40,7 +40,7 @@ services:
 #    networks:
 #      - postgres
 #    ports:
-#      - "8080:80"
+#      - "8081:80"
 #    volumes:
 #      - .:/root/.pgadmin
 #    environment:
