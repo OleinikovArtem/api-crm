@@ -1,5 +1,5 @@
 import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
-import { User as UserDB, ROLE } from '.prisma/client';
+import { User as UserDB } from '.prisma/client';
 
 @ObjectType()
 export class User {
@@ -24,7 +24,7 @@ export class User {
   @Field(() => String)
   password: UserDB['password'];
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   image: UserDB['image'];
 
   @Field(() => String)

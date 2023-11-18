@@ -22,3 +22,7 @@ export interface SignInInput {
 export interface SignUpInput extends SignInInput {
   name: string
 }
+
+export interface RequestWithUser extends Request {
+  user: { sub: string };
+}
