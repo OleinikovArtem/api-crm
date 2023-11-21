@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 
 @Injectable()
 export class UsersRepository {
@@ -26,5 +26,23 @@ export class UsersRepository {
 
   async create(data: Prisma.UserCreateInput) {
     return this.prisma.user.create({ data });
+  }
+
+  async getUsers(params: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.UserWhereUniqueInput;
+    where?: Prisma.UserWhereInput;
+    orderBy?: Prisma.UserOrderByWithRelationInput;
+  }): Promise<User[]> {
+    return this.prisma.user.findMany({ ...params });
+  }
+
+  async getCount(params?: {
+    cursor?: Prisma.UserWhereUniqueInput;
+    where?: Prisma.UserWhereInput;
+    orderBy?: Prisma.UserOrderByWithRelationInput;
+  }): Promise<number> {
+    return this.prisma.user.count(params);
   }
 }

@@ -2,6 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
 import * as bcryptjs from 'bcryptjs';
 
+import { PaginationOutput } from '@pagination/pagination.types';
+import { Prisma, User } from '@prisma/client';
+import { calculatePagination } from '@pagination/pagination.utils';
+import { GetUsersWithPaginationArgs } from '@modules/users/dto/getUsers.args';
+
 @Injectable()
 export class UsersService {
   constructor(private repository: UsersRepository) {
@@ -13,6 +18,28 @@ export class UsersService {
 
   async findById(id: string) {
     return this.repository.findOne({ id });
+  }
+
+  async getUsers(params: GetUsersWithPaginationArgs): Promise<PaginationOutput<User>> {
+    const { page, limit } = params;
+    const where: Prisma.UserWhereInput = {};
+
+    const itemsReq = this.repository.getUsers({
+      skip: ((page || 1) - 1) * limit,
+      take: limit,
+      where,
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+    const totalCountReq = this.repository.getCount({ where });
+
+    const [items, totalCount] = await Promise.all([itemsReq, totalCountReq]);
+
+    return {
+      items,
+      ...calculatePagination({ totalCount, limit, currentPage: page }),
+    };
   }
 
   async createUser(inputData: { email: string, password: string, name: string }) {

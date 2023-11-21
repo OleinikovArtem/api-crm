@@ -46,7 +46,7 @@ export class ProductsService {
     }
 
     const itemsReq = this.repository.getProducts({
-      skip: (page - 1) * limit,
+      skip: ((page || 1) - 1) * limit,
       take: limit,
       where,
       orderBy: {
