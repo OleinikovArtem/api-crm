@@ -8,7 +8,7 @@ import { ROLE } from '.prisma/client';
 
 import { User } from './user.model';
 import { UsersService } from './users.service';
-import { GetUsersWithPaginationArgs, UsersOutput } from '@modules/users/dto/getUsers.args';
+import { GetUserByEmail, GetUsersWithPaginationArgs, UsersOutput } from '@modules/users/dto/getUsers.args';
 
 @Resolver()
 export class UsersResolver {
@@ -21,10 +21,16 @@ export class UsersResolver {
     return this.usersService.findById(req.user.sub);
   }
 
-  @UseGuards(RoleGuard([ROLE.EMPLOYEE, ROLE.ADMIN, ROLE.CLIENT]))
+  @UseGuards(RoleGuard([ROLE.EMPLOYEE, ROLE.ADMIN]))
   @Query(() => UsersOutput, { name: 'users' })
   async getUsers(@Args() args: GetUsersWithPaginationArgs) {
     return this.usersService.getUsers(args);
+  }
+
+  @UseGuards(RoleGuard([ROLE.EMPLOYEE, ROLE.ADMIN]))
+  @Query(() => User, { name: 'user' })
+  async getUser(@Args() args: GetUserByEmail) {
+    return this.usersService.findByEmail(args.email);
   }
 
 }
