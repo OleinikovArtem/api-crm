@@ -24,5 +24,5 @@ export interface SignUpInput extends SignInInput {
 }
 
 export interface RequestWithUser extends Request {
-  user: { sub: string };
+  user: TokenPayload;
 }

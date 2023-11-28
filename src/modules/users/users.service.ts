@@ -6,6 +6,7 @@ import { PaginationOutput } from '@pagination/pagination.types';
 import { Prisma, User } from '@prisma/client';
 import { calculatePagination } from '@pagination/pagination.utils';
 import { GetUsersWithPaginationArgs } from '@modules/users/dto/getUsers.args';
+import { UserWithoutPassword } from '@modules/users/user.model';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,10 @@ export class UsersService {
 
   async findByEmail(email: string) {
     return this.repository.findOne({ email });
+  }
+
+  async updateUser(email: string, data: User | UserWithoutPassword) {
+    return this.repository.update(data.email, data);
   }
 
   async findById(id: string) {
